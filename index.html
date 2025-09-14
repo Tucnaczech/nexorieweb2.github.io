@@ -1,123 +1,171 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nexorie.eu - Minecraft Server</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
     body {
-      margin: 0; font-family: 'Inter',sans-serif;
-      background: linear-gradient(135deg, #1a1b27 0%, #232449 100%);
-      color: #e7eaf6; min-height: 100vh; line-height: 1.7;
+      margin: 0;
+      font-family: 'Inter',sans-serif;
+      background: linear-gradient(135deg, #181925 0%, #221a3e 100%);
+      min-height: 100vh;
+      color: #e3ebfd;
+      transition: background 1s;
     }
-    .container { max-width: 1100px; margin: auto; padding: 0 24px; }
+    .container { max-width:1100px; margin:auto; padding:0 18px; }
     header {
       background: rgba(24,24,48,0.98);
-      box-shadow: 0 2px 14px rgba(118, 75, 162, 0.12);
-      position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 2px 14px rgba(118,75,162,0.12);
+      position: sticky;
+      top: 0; z-index: 10;
       padding-bottom: 0.5rem;
     }
     .nav { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; }
-    .nav-logo img { height: 42px; border-radius: 8px; }
-    .nav-links { display: flex; gap: 32px; }
+    .nav-logo img { height: 46px; border-radius: 8px; }
+    .nav-links { display: flex; gap: 30px; }
     .nav-links a, .nav-links button {
-      background: none; border: none; color: #bfcaff;
-      font-weight: 600; font-size: 1.05rem; cursor: pointer; padding: 0.3rem 1rem; text-decoration: none;
-      border-radius: 20px; transition: background 0.2s, color 0.2s;
+      background: none; border: none; color: #bfcef7;
+      font-weight: 600; font-size: 1.09rem; cursor: pointer;
+      padding: 0.4rem 1.1rem; border-radius: 22px; transition: background 0.2s, color 0.2s;
+      text-decoration: none;
     }
     .nav-links a.active, .nav-links button.active,
     .nav-links a:hover, .nav-links button:hover {
-      color: #fff; background: linear-gradient(90deg,#657be8,#764ba2);
+      color: #fff;
+      background: linear-gradient(90deg,#657be8,#764ba2);
     }
     .nav-links .store-btn {
       color: #fff; background: linear-gradient(90deg,#764ba2,#657be8);
       font-weight: 700; box-shadow: 0 2px 12px #764ba2;
-      margin-left: 18px;
+      margin-left: 10px;
     }
-
-    /* Hero sekce */
-    .hero {
-      margin-top: 48px; margin-bottom: 54px;
-      background: linear-gradient(115deg,#657be8 15%,#a173e6 70%,#f2ccff 100%);
-      border-radius: 28px; box-shadow: 0 16px 32px rgba(118,75,162,0.22);
-      text-align: center; padding: 60px 32px 70px; min-height: 340px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-    }
-    .hero h1 {font-size:3.3rem; font-weight:900; margin-bottom:1.3rem; color:#fff;}
-    .hero-desc {font-size:1.35rem;margin-bottom:2.1rem; color:#f7f8ff;}
-    .server-ip {
-      display: inline-block;
-      background: rgba(255,255,255,0.16); color: #fff;
-      padding: 1.1rem 2.8rem; font-size:1.35rem; font-weight:700;
-      border-radius: 40px; box-shadow: 0 4px 18px #764ba2;
-      margin-bottom: 0.6rem; margin-top: 10px; cursor: pointer;
-      border: none; transition: transform 0.18s;
-      user-select: all;
-    }
-    .server-ip:hover { transform: scale(1.05); background: rgba(255,255,255,0.3);}
-    /* CTA Store v Hero */
-    .store-cta {
-      display: inline-block;
-      margin-top: 24px; font-size: 1.15rem;
-      background: linear-gradient(90deg,#764ba2,#657be8);
-      color: white; font-weight: 700;
-      border-radius: 40px; padding: 0.85rem 2.4rem;
-      transition: box-shadow 0.22s, transform 0.17s;
-      box-shadow: 0 2px 14px #764ba2;
-      border: none; cursor: pointer; text-decoration: none;
-    }
-    .store-cta:hover{box-shadow:0 10px 32px #764ba2;transform:scale(1.06);}
-    /* Roztažené sekce */
-    .section {margin-top: 74px; margin-bottom: 74px;}
+    /* Sekce */
+    .section { margin-top:78px; margin-bottom:78px; }
     .section-title {
-      font-size:2.55rem; font-weight:800; text-align:center;
-      margin-bottom:2.3rem; background: linear-gradient(90deg,#657be8,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:0.02em;
+      font-size:2.35rem; font-weight:900; text-align:center;
+      margin-bottom:2rem; margin-top:0.25rem;
+      background:linear-gradient(90deg,#657be8,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
     }
+    /* Hero sekce bez obdélníku! */
+    .hero {
+      text-align:center;
+      padding:70px 10px 64px;
+      margin-bottom:36px;
+      background: linear-gradient(115deg,#657be8 10%,#a173e6 80%,#f2ccff 100%);
+      border-radius: 0 0 70px 70px;
+      box-shadow:0 18px 44px rgba(118,75,162,0.14);
+      color:#fff;
+    }
+    .hero h1 {font-size:3rem;font-weight:900;margin-bottom:1.25rem;}
+    .hero-desc {font-size:1.25rem;margin-bottom:1.6rem;}
+    .server-ip-btn {
+      display:inline-block;background:rgba(255,255,255,0.16);color:#fff;
+      padding:1rem 2.3rem;font-size:1.19rem;font-weight:700;
+      border-radius:40px;box-shadow:0 3px 16px #764ba2;
+      margin-bottom:0.8rem;cursor:pointer;border:none;user-select:all;
+      position:relative;overflow:hidden;transition:.2s;
+    }
+    .server-ip-btn:hover { background:rgba(255,255,255,0.27); transform:scale(1.04);}
+    .store-cta {
+      display:inline-block;
+      margin-top:24px; font-size:1.08rem;
+      background: linear-gradient(90deg,#764ba2,#657be8);
+      color:white;font-weight:700;
+      border-radius:40px;padding:0.77rem 2.1rem;
+      box-shadow:0 2px 12px #764ba2;
+      border:none;cursor:pointer;text-decoration:none;transition:.2s;
+    }
+    .store-cta:hover { box-shadow:0 9px 28px #764ba2; transform:scale(1.05);}
+    /* Stats */
     .stats-bar {
-      background:rgba(34,34,54,0.92);border-radius:24px;
-      padding:2.6rem 0;box-shadow:0 10px 24px rgba(118,75,162,0.14);
-      display:flex;justify-content:center;gap:70px;max-width:900px;margin:auto;
+      background:rgba(34,34,54,0.93);border-radius:24px;
+      padding:2.3rem 0;box-shadow:0 10px 24px rgba(118,75,162,0.19);
+      display:flex;justify-content:center;gap:70px;max-width:900px;margin:auto;margin-bottom:15px;
     }
-    .stat-item{flex:1 1 120px;text-align:center;}
-    .stat-num{font-size:2.6rem;font-weight:900;background:linear-gradient(90deg,#657be8,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .stat-label{font-size:1.05rem;color:#aac0ff;font-weight:700;margin-top:2px;}
-    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.7rem;}
-    .card{background:#232449;border-radius:16px;padding:2rem 1.5rem;color:#f3f4ff;box-shadow:0 5px 36px rgba(118,75,162,0.26); text-align:center;transition:transform 0.3s;}
+    .stat-item { flex:1 1 120px; text-align:center;}
+    .stat-num { font-size:2.5rem; font-weight:900;
+      background:linear-gradient(90deg,#657be8,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .stat-label { font-size:1.05rem; color:#aac0ff; font-weight:700; margin-top:2px;}
+
+    /* Cards */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.7rem;margin-bottom:15px;}
+    .card{background:#232449;border-radius:16px;padding:2rem 1.5rem;color:#f3f4ff;box-shadow:0 5px 36px rgba(118,75,162,0.22); text-align:center;transition:transform 0.3s;}
     .card:hover{transform:translateY(-6px) scale(1.01);}
-    .card-icon{font-size:2.4rem;margin-bottom:1rem;}
-    .card h3{font-size:1.25rem;margin-bottom:0.9rem;}
+    .card-icon{font-size:2.2rem;margin-bottom:1rem;}
+    .card h3{font-size:1.18rem;margin-bottom:0.9rem;}
     .card p{font-size:1rem;color:#bfcaff;}
-    .info-box{background:rgba(102,126,234,0.13);padding:1.4rem 1.7rem;border-radius:12px;border-left:6px solid #764ba2;color:#eaf1ff;margin-bottom:2.4rem;}
-    .info-box h3{font-weight:700;font-size:1.07rem;margin-bottom:0.7rem;}
+    .info-box{background:rgba(102,126,234,0.10);padding:1.25rem 1.5rem;border-radius:12px;border-left:5px solid #764ba2;color:#eaf1ff;margin-bottom:1.8rem;}
+    .info-box h3, .info-box strong{font-weight:700;}
+    /* Tým */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.2rem;margin-bottom:15px;}
+    .team-member{background:#232449;border-radius:12px;padding:1.7rem 1rem;box-shadow:0 4px 22px rgba(118,75,162,0.16);color:#e7eaf6;text-align:center;}
+    .team-member .member-avatar{font-size:2.1rem;background:linear-gradient(90deg,#657be8,#764ba2);width:64px;height:64px;margin:auto 0 1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 0 10px #764ba2;}
+    .member-role{font-size:1.01rem;color:#b1a9f9; margin-bottom:0.5rem;}
+    /* Pravidla */
+    .rules-list{background:#24244e;border-radius:14px;padding:1.5rem 1.2rem;color:#ccd1ff;
+      box-shadow:0 8px 26px rgba(102,126,234,0.22);margin-bottom:2rem;}
+    .rules-list h3{margin-bottom:1rem;color:#9eaaff;font-weight:800;font-size:1.07rem;}
+    .rules-list ul{list-style:none;padding-left:0;}
+    .rules-list li{padding:0.38rem 0;font-size:1.01rem;line-height:1.3;position:relative;}
+    .rules-list li::before{content:"§";color:#7659c7;font-weight:900;position:absolute;left:-18px;}
+    /* FAQ */
+    .faq-item{background:#232449;border-radius:13px;margin:1.2rem 0;box-shadow:0 3px 13px #1b1b2e;cursor:pointer;transition:.22s;padding:1rem 1.5rem;}
+    .faq-item:hover{box-shadow:0 12px 36px #764ba2;}
+    .faq-question{font-weight:700;font-size:1.13rem;background:linear-gradient(90deg,#657be8,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .faq-answer{display:none;color:#bfc1f7;font-weight:500;font-size:1rem;line-height:1.45;border-top:1px solid #764ba2;padding-top:0.7rem;margin-top:0.5rem;}
+    .faq-item.active .faq-answer{display:block;animation:fadeIn 0.55s;}
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(10px);}
+      to { opacity:1; transform:translateY(0);}
+    }
     /* Kontakt */
-    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.3rem;}
-    .contact-card{background:#232449;border-radius:14px;padding:2rem 1.2rem;color:#e7eaf6;box-shadow:0 4px 18px rgba(118,75,162,0.18);}
-    .contact-card h4{margin-bottom:0.8rem;}
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
+    .contact-card{background:#232449;border-radius:13px;padding:1.4rem 1.2rem;color:#e7eaf6;}
+    .contact-card h4{margin-bottom:0.6rem;}
     .contact-card p,.contact-card a{color:#bfcaff;font-size:1.01rem;}
-    .contact-card a{ text-decoration:underline; }
+    .contact-card a{text-decoration:underline;}
+    .notification {
+      position:fixed;top:28px;right:24px;z-index:9999;
+      background: linear-gradient(80deg,#657be8,#764ba2 90%);
+      color:#fff;padding:1.1rem 2.2rem;border-radius:30px;
+      font-weight:700;font-size:1.14rem;text-align:center;
+      box-shadow:0 6px 30px #764ba2;
+      display:flex;align-items:center;gap:1.2rem;
+      animation:fadeToastInOut 2.2s cubic-bezier(.22,.61,.36,1);
+    }
+    .spinner {
+      width:22px; height:22px; border:3px solid #fff; border-top:3px solid #764ba2; border-radius:50%; display:inline-block;animation:spin 0.7s linear infinite;margin-right:9px;
+    }
+    @keyframes spin {to{transform:rotate(360deg);}}
+    @keyframes fadeToastInOut {
+      0% { opacity:0; transform:translateY(-30px);}
+      10%,80%{ opacity:1; transform:translateY(0);}
+      100%{ opacity:0; transform:translateY(-30px);}
+    }
     /* Footer */
-    footer{background:#18192a; color:#bfcaff; padding:2.5rem 0 1.4rem;margin-top:64px;}
-    .footer-content{display:flex;justify-content:center;gap:4.5rem;flex-wrap:wrap;}
-    .footer-section h4{color:#c3caff;margin-bottom:0.5rem;font-size:1.08rem;}
+    footer{background:#18192a; color:#bfcaff; padding:2rem 0 1.4rem;margin-top:70px;}
+    .footer-content{display:flex;justify-content:center;gap:4.2rem;flex-wrap:wrap;}
+    .footer-section h4{color:#c3caff;margin-bottom:0.5rem;font-size:1.07rem;}
     .footer-section a{color:#92a1e5;display:block;margin-bottom:0.35rem;text-decoration:none;}
     .footer-section a:hover{color:#fff;}
     .social-links{display:flex;justify-content:center;gap:1.1rem;margin-top:1.2rem;}
-    .social-links a{background:linear-gradient(90deg,#657be8,#764ba2);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.15rem;}
+    .social-links a{background:linear-gradient(90deg,#657be8,#764ba2);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;}
     .social-links a:hover{transform:scale(1.18);}
-    /* Responsivita */
     @media(max-width:900px){
       .stats-bar{gap:30px;}
-      .section{margin-top:40px;margin-bottom:40px;}
+      .section{margin-top:38px;margin-bottom:38px;}
     }
     @media(max-width:600px){
-      .nav-links{gap:12px;}
-      .hero{padding:35px 10px 45px;min-height:200px;}
-      .section-title{font-size:2.1rem;}
-      .stats-bar{flex-direction:column;gap:18px;}
+      .nav-links{gap:10px;}
+      .hero{padding:35px 7px 36px;}
+      .section-title{font-size:1.35rem;}
+      .stats-bar{flex-direction:column;gap:16px;}
     }
+    /* Page systém */
+    .page { display: none; }
+    .page.active { display: block; }
   </style>
 </head>
 <body>
@@ -125,7 +173,6 @@
     <nav class="nav container">
       <div class="nav-logo">
         <img src="logo.png" alt="Nexorie logo" />
-        <span style="font-size:1.7rem;font-weight:900;background:linear-gradient(90deg,#657be8,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Nexorie.eu</span>
       </div>
       <div class="nav-links">
         <a href="#" onclick="showPage('home')" class="active">Domů</a>
@@ -137,38 +184,23 @@
       </div>
     </nav>
   </header>
-
   <main class="container">
-    <!-- Hero sekce + CTA Store -->
+    <!-- Hlavní stránka -->
     <section id="home" class="page active">
       <div class="hero">
         <h1>Vítej na Nexorie.eu!</h1>
-        <div class="hero-desc">Prémiový Minecraft server pro CZ/SK hráče<br />Premium & Cracked | Verze 1.20.x | Online 24/7</div>
-        <button class="server-ip" onclick="copyIP()" title="Zkopírovat IP serveru">mc.nexorie.eu</button>
+        <div class="hero-desc">Prémiový Minecraft server pro CZ/SK hráče<br>Premium & Cracked | Verze 1.20.x | Online 24/7</div>
+        <button class="server-ip-btn" onclick="copyIP()" title="Zkopírovat IP serveru">mc.nexorie.eu</button>
         <a class="store-cta" href="https://store.nexorie.eu" target="_blank">💎 Přejít na Store</a>
       </div>
-
       <div class="section">
         <div class="stats-bar">
-          <div class="stat-item">
-            <div class="stat-num">350+</div>
-            <div class="stat-label">Aktivních hráčů</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">24/7</div>
-            <div class="stat-label">Server online</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">12+</div>
-            <div class="stat-label">Herních módů</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">3+</div>
-            <div class="stat-label">Roky provozu</div>
-          </div>
+          <div class="stat-item"><div class="stat-num">350+</div><div class="stat-label">Aktivních hráčů</div></div>
+          <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Server online</div></div>
+          <div class="stat-item"><div class="stat-num">12+</div><div class="stat-label">Herních módů</div></div>
+          <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">Roky provozu</div></div>
         </div>
       </div>
-
       <div class="section">
         <h2 class="section-title">O serveru Nexorie</h2>
         <div class="info-box">
@@ -193,42 +225,110 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="contact" class="page" style="display:none">
       <div class="section">
-        <h2 class="section-title">Kontakt & Podpora</h2>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h4>Discord Server</h4>
-            <p>Rychlá podpora, komunita, otázky i nahlášení problémů.</p>
-            <a href="https://discord.nexorie.eu" target="_blank">Připojit se na Discord</a>
-          </div>
-          <div class="contact-card">
-            <h4>Email hlavní podpora</h4>
-            <p>Napište kdykoliv: <a href="mailto:info@nexorie.eu">info@nexorie.eu</a></p>
-          </div>
-          <div class="contact-card">
-            <h4>Majitel (ownedbyshade)</h4>
-            <p>E-mail: <a href="mailto:ownedbyshade@nexorie.eu">ownedbyshade@nexorie.eu</a></p>
-          </div>
-          <div class="contact-card">
-            <h4>Vedení (Ar0n1s_)</h4>
-            <p>E-mail: <a href="mailto:aron1s@nexorie.eu">aron1s@nexorie.eu</a></p>
-          </div>
-          <div class="contact-card">
-            <h4>Admin (Tucnaczech)</h4>
-            <p>E-mail: <a href="mailto:tucnaczech@nexorie.eu">tucnaczech@nexorie.eu</a></p>
-          </div>
-        </div>
-        <div class="info-box" style="margin-top:2.3rem;">
-          <h3>📞 Technická podpora</h3>
-          <p>Tickety na Discordu nebo e-mail – pomůžeme co nejdřív.</p>
+        <h2 class="section-title">Herní módy</h2>
+        <div class="cards-grid">
+          <div class="card"><div class="card-icon">⚔️</div><h3>PvP Arena</h3><p>Epické souboje v arenách s ELO systémem a hodnotnými odměnami. Staň se šampionem!</p></div>
+          <div class="card"><div class="card-icon">🌳</div><h3>Survival</h3><p>Standardní survival s možností claimovat pozemky, obchodovat a budovat se spoluhráči.</p></div>
+          <div class="card"><div class="card-icon">💰</div><h3>Ekonomika</h3><p>Komplexní ekonomika s bankami, aukcemi a obchodováním. Vydělávej a investuj moudře.</p></div>
+          <div class="card"><div class="card-icon">🎲</div><h3>Minihry</h3><p>SkyWars, BedWars, Parkour, Murder Mystery a další s denními turnaji.</p></div>
+          <div class="card"><div class="card-icon">🛠️</div><h3>Creative Build</h3><p>Kreativní prostor pro stavby s WorldEdit, plotováním a soutěžemi o nejlepší buildy.</p></div>
+          <div class="card"><div class="card-icon">🎉</div><h3>Eventy & Soutěže</h3><p>Pravidelné eventy, sezónní akce a soutěže s hodnotnými cenami včetně reálných odměn.</p></div>
         </div>
       </div>
     </section>
-    <!-- další sekce (team, rules, faq) můžeš přidat obdobně -->
+    <!-- Tým -->
+    <section id="team" class="page">
+      <div class="section">
+        <h2 class="section-title">Náš tým</h2>
+        <div class="team-grid">
+          <div class="team-member"><div class="member-avatar">B</div><h3>ownedbyshade</h3><div class="member-role">Majitel serveru</div><p>Zakladatel a majitel Nexorie.eu.</p></div>
+          <div class="team-member"><div class="member-avatar">T</div><h3>Ar0n1s_</h3><div class="member-role">Vedení serveru</div><p>Management a organizace.</p></div>
+          <div class="team-member"><div class="member-avatar">T</div><h3>Tucnaczech</h3><div class="member-role">Hlavní administrátor</div><p>Správa a vývoj serveru.</p></div>
+          <div class="team-member"><div class="member-avatar">W</div><h3>Pavlas</h3><div class="member-role">Hlavní Helper</div><p>Vedení týmu, školení členů, koordinace pomoci hráčům.</p></div>
+          <div class="team-member"><div class="member-avatar">H</div><h3>Majorcz13</h3><div class="member-role">Helper</div><p>Pomáhá nováčkům, aktivní v chatu.</p></div>
+          <div class="team-member"><div class="member-avatar">C</div><h3>Krtek</h3><div class="member-role">Hlavní Builder</div><p>Design a stavba hlavních projektů, spawnů.</p></div>
+        </div>
+        <div class="info-box"><h3>🎯 Chceš do týmu?</h3><p>Hledáme aktivní a zodpovědné hráče do všech rolí. Sleduj oznámení na Discordu nebo nás kontaktuj!</p></div>
+      </div>
+    </section>
+    <!-- Pravidla -->
+    <section id="rules" class="page">
+      <div class="section">
+        <h2 class="section-title">Pravidla serveru</h2>
+        <div class="rules-list"><h3>🎮 Obecná pravidla</h3>
+          <ul>
+            <li>Buď slušný k ostatním hráčům a personálu</li>
+            <li>Nepoužívej nevhodný jazyk nebo spam</li>
+            <li>Respektuj ostatní hráče a jejich vlastnictví</li>
+            <li>Neobcházej mute nebo ban pomocí alt účtů</li>
+            <li>Dodržuj pokyny členů týmu</li>
+          </ul>
+        </div>
+        <div class="rules-list"><h3>⚔️ PvP pravidla</h3>
+          <ul>
+            <li>Žádné cheaty, hacked clienty nebo unfair výhody</li>
+            <li>Nepoužívej x-ray nebo podobné modifikace</li>
+            <li>Team killing je zakázáno</li>
+            <li>Neexploituj bugy ve hře</li>
+            <li>Griefing v PvP zónách je povolen</li>
+          </ul>
+        </div>
+        <div class="rules-list"><h3>🏠 Survival pravidla</h3>
+          <ul>
+            <li>Neništ cizí stavby (griefing zakázán)</li>
+            <li>Nekraď z cizích truhel</li>
+            <li>Claimuj si svůj pozemek</li>
+            <li>Nepřekážej ostatním v jejich projektech</li>
+            <li>Udržuj okolí svých staveb čisté</li>
+          </ul>
+        </div>
+        <div class="rules-list"><h3>💬 Chat pravidla</h3>
+          <ul>
+            <li>Neflooduj chat opakovanými zprávami</li>
+            <li>Nevyužívej CAPS LOCK (pokládá se za křičení)</li>
+            <li>Nežádej o ranky nebo items</li>
+            <li>Nereklamuj jiné servery</li>
+            <li>Nerozšiřuj osobní informace</li>
+          </ul>
+        </div>
+        <div class="info-box"><h3>⚠️ Sankce za porušení</h3>
+          <p><strong>Varování:</strong> První přestupek obvykle končí varováním<br>
+          <strong>Mute:</strong> Za spam nebo nevhodný chat (1–24 hodin)<br>
+          <strong>Kick:</strong> Za menší porušení pravidel<br>
+          <strong>Temp Ban:</strong> Závažnější přestupky (1–30 dní)<br>
+          <strong>Permanent Ban:</strong> Opakované závažné porušení</p>
+        </div>
+      </div>
+    </section>
+    <!-- FAQ -->
+    <section id="faq" class="page">
+      <div class="section">
+        <h2 class="section-title">Často kladené otázky</h2>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Jak se připojím na server?</div><div class="faq-answer"><p>Otevři Minecraft, v multiplayeru přidej server s IP <strong>mc.nexorie.eu</strong>.</p></div></div>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Jakou verzi Minecraftu potřebuju?</div><div class="faq-answer"><p>Server podporuje verze 1.20.x, doporučujeme nejnovější 1.20.4.</p></div></div>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Můžu hrát s cracked Minecraftem?</div><div class="faq-answer"><p>Ano, server podporuje premium i cracked hráče.</p></div></div>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Jak získám peníze na serveru?</div><div class="faq-answer"><p>Prodáváním itemů v /shop, prací v jobs, obchodováním nebo eventy.</p></div></div>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Jak claimnu pozemek?</div><div class="faq-answer"><p>/claim, golden shovel, vyznač dva rohy oblasti.</p></div></div>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Co dělat když mě někdo grieví?</div><div class="faq-answer"><p>Nahlas členům týmu přes /report nebo Discord, grieiving je zakázán.</p></div></div>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Jak se stanu členem týmu?</div><div class="faq-answer"><p>Buď aktivní, pomáhej ostatním, sleduj oznámení na Discordu.</p></div></div>
+        <div class="faq-item" tabindex="0"><div class="faq-question">Kde najdu všechny příkazy?</div><div class="faq-answer"><p>/help pro základ, /menu pro interaktivní menu.</p></div></div>
+      </div>
+    </section>
+    <!-- Kontakt -->
+    <section id="contact" class="page">
+      <div class="section">
+        <h2 class="section-title">Kontakt & Podpora</h2>
+        <div class="contact-grid">
+          <div class="contact-card"><h4>Discord Server</h4><p>Rychlá podpora, komunita, otázky i nahlášení problémů.</p><a href="https://discord.nexorie.eu" target="_blank">Připojit se na Discord</a></div>
+          <div class="contact-card"><h4>Email hlavní podpora</h4><p><a href="mailto:info@nexorie.eu">info@nexorie.eu</a></p></div>
+          <div class="contact-card"><h4>Majitel (ownedbyshade)</h4><p><a href="mailto:ownedbyshade@nexorie.eu">ownedbyshade@nexorie.eu</a></p></div>
+          <div class="contact-card"><h4>Vedení (Ar0n1s_)</h4><p><a href="mailto:aron1s@nexorie.eu">aron1s@nexorie.eu</a></p></div>
+          <div class="contact-card"><h4>Admin (Tucnaczech)</h4><p><a href="mailto:tucnaczech@nexorie.eu">tucnaczech@nexorie.eu</a></p></div>
+        </div>
+        <div class="info-box" style="margin-top:2.1rem;"><h3>📞 Technická podpora</h3><p>Tickety na Discordu nebo e-mail – pomůžeme co nejdřív.</p></div>
+      </div>
+    </section>
   </main>
   <footer>
     <div class="footer-content">
@@ -253,29 +353,31 @@
     <p style="margin-top:1rem;">&copy; 2025 Nexorie.eu | Server IP: <strong>mc.nexorie.eu</strong></p>
   </footer>
   <script>
-    // Přepínání sekcí
+    // Přepínání stránek
     function showPage(id) {
-      document.querySelectorAll('.page').forEach(page => page.style.display='none');
-      document.getElementById(id).style.display='block';
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
       document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
       let n = document.querySelector('.nav-links a[onclick*="'+id+'"]');
       if(n) n.classList.add('active');
       window.scrollTo({top:0,behavior:'smooth'});
     }
+    // FAQ animation
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.onclick = function() { this.classList.toggle('active'); };
+    });
+    // IP kopírování s loaderem/animací
     function copyIP() {
-      navigator.clipboard.writeText('mc.nexorie.eu').then(function(){
-        const n=document.createElement('div');
-        n.className='server-ip'; n.style.position='fixed';
-        n.style.top='20px'; n.style.right='24px'; n.style.zIndex='9000';
-        n.style.background='linear-gradient(90deg,#657be8,#764ba2)';
-        n.style.color='#fff'; n.style.boxShadow='0 4px 28px #764ba2';
-        n.style.padding='1rem 2rem'; n.style.fontSize='1.17rem';
-        n.style.borderRadius='24px'; n.textContent='✅ IP adresa zkopírována!';
-        document.body.appendChild(n);
-        setTimeout(()=>n.remove(),2400);
-      });
+      const notif = document.createElement('div');
+      notif.className = 'notification';
+      notif.innerHTML = '<span class="spinner"></span> IP adresa se kopíruje...';
+      document.body.appendChild(notif);
+      setTimeout(() => {
+        notif.innerHTML = '✅ IP adresa <b>mc.nexorie.eu</b> byla zkopírována!';
+        navigator.clipboard.writeText('mc.nexorie.eu');
+      }, 750);
+      setTimeout(()=>notif.remove(),2200);
     }
-    // Načti domů při startu
     document.addEventListener('DOMContentLoaded',()=>{
       showPage('home');
     });
