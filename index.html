@@ -411,7 +411,7 @@
       notif.innerHTML = '<span class="spinner"></span> IP adresa se kopíruje...';
       document.body.appendChild(notif);
       setTimeout(() => {
-        notif.innerHTML = '✅ IP adresa <b>mc.nexorie.eu</b> byla zkopírována!';
+        notif.innerHTML = '✅ IP adresa byla zkopírována!';
         navigator.clipboard.writeText('mc.nexorie.eu');
       }, 750);
       setTimeout(()=>notif.remove(),2200);
