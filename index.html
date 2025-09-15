@@ -190,7 +190,6 @@
         <a href="#" onclick="showPage('home')" class="active">Domů</a>
         <a href="#" onclick="showPage('team')">Tým</a>
         <a href="#" onclick="showPage('rules')">Pravidla</a>
-        <a href="#" onclick="showPage('faq')">FAQ</a>
         <a href="#" onclick="showPage('info')">Info</a>
         <a href="https://store.nexorie.eu" class="store-btn" target="_blank">Store</a>
       </div>
@@ -306,20 +305,7 @@
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="page">
-      <div class="section">
-        <h2 class="section-title">Často kladené otázky</h2>
-        <div class="faq-item" tabindex="0"><div class="faq-question">Jak se připojím na server?</div><div class="faq-answer"><p>Otevři Minecraft, v multiplayeru zadej IP <strong>mc.nexorie.eu</strong>.</p></div></div>
-        <div class="faq-item" tabindex="0"><div class="faq-question">Jakou verzi potřebuju?</div><div class="faq-answer"><p>Server podporuje verze 1.20.x, doporučujeme nejnovější 1.20.4.</p></div></div>
-        <div class="faq-item" tabindex="0"><div class="faq-question">Je server pro cracked hráče?</div><div class="faq-answer"><p>Ano, podporujeme i cracked Minecraft.</p></div></div>
-        <div class="faq-item" tabindex="0"><div class="faq-question">Jak vydělat peníze?</div><div class="faq-answer"><p>Prodej itemů v /shop, práce v jobs, eventy.</p></div></div>
-        <div class="faq-item" tabindex="0"><div class="faq-question">Jak claimnu pozemek?</div><div class="faq-answer"><p>/claim, golden shovel, označ dva rohy.</p></div></div>
-        <div class="faq-item" tabindex="0"><div class="faq-question">Co dělat když mě někdo grieví?</div><div class="faq-answer"><p>Nahlas členům týmu přes /report nebo Discord ticket.</p></div></div>
-      </div>
-    </section>
-
-    <!-- Kontakt -->
+    <!-- Info -->
 <section id="info" class="page">
   <div class="section contact-section">
     <h2 class="section-title">Informace & Kontakt</h2>
@@ -332,33 +318,44 @@
       <div class="contact-box">
         <h4>📧 E-mail</h4>
         <p>Obecná podpora: <a href="mailto:info@nexorie.eu">info@nexorie.eu</a></p>
-        <p>Oficiální majitelé: <a href="mailto:ownedbyshade@nexorie.eu">ownedbyshade@nexorie.eu</a>, <a href="mailto:paldes12@nexorie.eu">paldes12@nexorie.eu</a></p>
+        <p>Majitelé: <a href="mailto:ownedbyshade@nexorie.eu">ownedbyshade@nexorie.eu</a>, <a href="mailto:paldes12@nexorie.eu">paldes12@nexorie.eu</a></p>
       </div>
       <div class="contact-box">
-        <h4>👑 YouTuber/TikTok rank</h4>
-        <p><b>Jak získat:</b><br>
-        Stačí mít aktivní YT/TikTok kanál zaměřený na Minecraft.<br>
-        Podmínky: min. 400 odběratelů/1000 sledujících, pravidelné videa/Reels/TikTok.<br>
-        <b>Postup:</b> Napiš na <a href="mailto:info@nexorie.eu">info@nexorie.eu</a> nebo na Discord ticket „YT/TikTok Rank“. Připoj ODKAZ na kanál.<br>
-        <b>Výhody:</b> Speciální role, exkluzivní Discord badge, možnost pořádat eventy.
-        </p>
+        <h4>👑 YT/TikTok rank</h4>
+        <p><b>Jak získat:</b> Aktivní YT/TikTok kanál o Minecraftu. Podmínka: min. 400 odběrů/1000 sledujících.<br>
+        <b>Jak žádat:</b> Napiš na <a href="mailto:info@nexorie.eu">info@nexorie.eu</a> nebo otevři ticket na Discordu („YT/TikTok Rank“) a přidej odkaz na kanál.<br>
+        <b>Výhody:</b> Speciální role, badge, možnost eventů.</p>
       </div>
       <div class="contact-box">
-        <h4>📋 Partnerství a spolupráce</h4>
-        <p>Zájemci o partnerství (YouTube, Discord, eventy) kontaktují majitele nebo ticket.<br>
-        <b>Podmínky:</b> aktivita, originalita, komunita.</p>
-      </div>
-      <div class="contact-box">
-        <h4>🛡️ Bezpečnost</h4>
-        <p>Veškeré žádosti o unmute/unban či řešení sporů zasílejte přes ticket nebo e-mailem.<br>
-        <b>Vše se řídí pravidly serveru — žádná mimořádná výjimka.</b>
-        </p>
+        <h4>📋 Partnerství</h4>
+        <p>Máš svou komunitu a chceš spolupráci? Kontaktuj nás přes e-mail či ticket.<br>
+          Požadujeme aktivitu, originalitu a přínos serveru.</p>
       </div>
     </div>
-    <div class="info-box" style="margin-top:2.1rem;">
+    <div class="info-box" style="margin-top:1.5rem;">
       <h3>Potřebuješ pomoc?</h3>
-      <p>Discord ticket systém je nejrychlejší. Na dotazy odpovídáme nejpozději do 24 hodin. Oficiální e-mail (info@nexorie.eu) je určen pro delší zprávy a obchodní kontakt.</p>
+      <p>Discord ticket je nejrychlejší. Na e-maily odpovídáme do 24h. Email preferuj pro obchodní nebo dlouhé zprávy.</p>
     </div>
+
+    <!-- FAQ začátek -->
+    <div class="info-box" style="background:#fff;">
+      <h3 style="color:#233684;">Často kladené otázky (FAQ)</h3>
+      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jak se připojím na server?</div>
+        <div class="faq-answer"><p>Otevři Minecraft, v multiplayeru zadej IP <strong>mc.nexorie.eu</strong>.</p></div></div>
+      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jakou verzi potřebuju?</div>
+        <div class="faq-answer"><p>Podporujeme 1.20.x, doporučena je 1.20.4.</p></div></div>
+      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Je server pro cracked hráče?</div>
+        <div class="faq-answer"><p>Ano, podporujeme i cracked Minecraft klienty.</p></div></div>
+      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jak získám peníze?</div>
+        <div class="faq-answer"><p>Prací v jobs, prodejem v /shop, eventy, obchodování s hráči.</p></div></div>
+      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jak claimnu pozemek?</div>
+        <div class="faq-answer"><p>/claim, zlatá lopata – označ dva rohy pozemku.</p></div></div>
+      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Co dělat když mě někdo grieví?</div>
+        <div class="faq-answer"><p>Nahlas členům týmu přes /report nebo ticket na Discordu.</p></div></div>
+      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Kde najdu příkazy?</div>
+        <div class="faq-answer"><p>/help pro základní příkazy, /menu pro interaktivní nabídku.</p></div></div>
+    </div>
+    <!-- FAQ konec -->
   </div>
 </section>
   </main>
