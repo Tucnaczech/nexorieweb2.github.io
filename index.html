@@ -1,196 +1,675 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nexorie.eu - Minecraft Server</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(120deg, #dfe7fd 0%, #edf2fa 100%);
-      min-height: 100vh; color: #2b2f4a;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nexorie.eu - Minecraft Server</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+<style>
+  /* Common base styles */
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(120deg, #dfe7fd 0%, #edf2fa 100%);
+    min-height: 100vh;
+    color: #2b2f4a;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 18px;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  header {
+    background: #fff;
+    box-shadow: 0 2px 10px #ecf0f6;
+    padding-bottom: 0.6rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 0;
+  }
+  .nav-logo img {
+    height: 46px;
+    border-radius: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  .nav-logo img:hover {
+    filter: brightness(1.07) drop-shadow(0 2px 10px #a3a9fa);
+  }
+  .nav-links {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+  }
+  .nav-links a, .nav-links button {
+    background: none;
+    border: none;
+    color: #5a65a4;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.38rem 1.1rem;
+    border-radius: 22px;
+    transition: background 0.18s, color 0.18s;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .nav-links a.active, .nav-links a:hover,
+  .nav-links button.active, .nav-links button:hover {
+    color: #fff;
+    background: #a3a9fa;
+  }
+  .nav-links .store-btn {
+    color: #fff;
+    background: #23242b;
+    box-shadow: 0 1px 10px #a3a9fa;
+    margin-left: 16px;
+  }
+  .nav-links .store-btn:hover {
+    background: #4d5060;
+  }
+
+  /* Darkmode styles */
+  body.darkmode {
+    background: linear-gradient(120deg, #191923 0%, #23233a 100%);
+    color: #dbeafe;
+  }
+  body.darkmode header {
+    background: #23242b;
+    box-shadow: 0 2px 10px #495485;
+  }
+  body.darkmode .nav-links a, body.darkmode .nav-links button {
+    color: #c4cbff;
+  }
+  body.darkmode .nav-links a.active, body.darkmode .nav-links a:hover,
+  body.darkmode .nav-links button.active, body.darkmode .nav-links button:hover {
+    background: #495485;
+    color: #fff;
+  }
+  body.darkmode .nav-links .store-btn {
+    background: #4d5060;
+    box-shadow: 0 1px 10px #6577ba;
+  }
+  body.darkmode .nav-links .store-btn:hover {
+    background: #2c2e41;
+  }
+
+  /* Hero section */
+  .hero {
+    text-align: center;
+    padding: 60px 8px 50px;
+    margin-bottom: 38px;
+    width: 100%;
+    background: linear-gradient(120deg, #d1d9f9 0%, #ececfb 80%);
+    border-radius: 0 0 54px 54px;
+    box-shadow: 0 12px 26px #e3e7fc;
+    color: #233684;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  body.darkmode .hero {
+    background: linear-gradient(120deg, #191923 0%, #23233a 100%);
+    box-shadow: none;
+    color: #a5b4fc;
+  }
+  .hero h1 {
+    font-size: 2.6rem;
+    font-weight: 900;
+    margin-bottom: 1.08rem;
+  }
+  .hero-desc {
+    font-size: 1.18rem;
+    margin-bottom: 1.45rem;
+    color: #5573ba;
+  }
+  body.darkmode .hero-desc {
+    color: #7f8cff;
+  }
+
+  /* Buttons */
+  .server-ip-btn {
+    display: inline-block;
+    background: #23242b;
+    color: #fff;
+    padding: 1.05rem 2.2rem;
+    font-size: 1.04rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border-radius: 40px;
+    box-shadow: 0 3px 16px #a3a9fa;
+    margin-bottom: 1.05rem;
+    cursor: pointer;
+    border: none;
+    user-select: all;
+    position: relative;
+    overflow: hidden;
+    transition: 0.22s;
+    letter-spacing: 0.03em;
+  }
+  .server-ip-btn:hover,
+  .server-ip-btn:active {
+    background: #35363e;
+  }
+  body.darkmode .server-ip-btn {
+    background: #4b4e64;
+    box-shadow: 0 3px 16px #6577ba;
+  }
+  body.darkmode .server-ip-btn:hover,
+  body.darkmode .server-ip-btn:active {
+    background: #616685;
+  }
+  .store-cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 1.06rem;
+    border-radius: 40px;
+    padding: 0.85rem 2.3rem;
+    background: #23242b;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    box-shadow: 0 2px 11px #cfd5e8;
+    border: none;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .store-cta:hover {
+    background: #3a3b48;
+  }
+  body.darkmode .store-cta {
+    background: #4b4e64;
+    box-shadow: 0 2px 11px #6577ba;
+  }
+  body.darkmode .store-cta:hover {
+    background: #616685;
+  }
+
+  /* Common sections */
+  .section {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+  .section-title {
+    font-size: 2.1rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 0.25rem;
+    background: linear-gradient(90deg, #5476e7, #be9ef4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  body.darkmode .section-title {
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+  }
+
+  /* Stats live */
+  .stats-live {
+    padding: 1.4rem 0;
+    font-size: 1.07rem;
+    text-align: center;
+    color: #3351b2;
+    background: #f5f7fd;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px #e3e7fc;
+    margin-bottom: 22px;
+    margin-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: background 0.4s, color 0.4s;
+  }
+  body.darkmode .stats-live {
+    background: #101126;
+    color: #859bed;
+    box-shadow: 0 3px 12px #3745a8;
+  }
+  .stats-live strong {
+    font-weight: 800;
+    color: #1e2865;
+  }
+  body.darkmode .stats-live strong {
+    color: #acc1ff;
+  }
+  #playerList {
+    color: #6384ce;
+    font-size: 0.95rem;
+  }
+  body.darkmode #playerList {
+    color: #7e95ff;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    background: #f5f7fd;
+    border-radius: 14px;
+    padding: 1.18rem 0;
+    box-shadow: 0 6px 12px #e3e7fc;
+    display: flex;
+    justify-content: center;
+    gap: 42px;
+    max-width: 900px;
+    margin: auto;
+    margin-bottom: 14px;
+    margin-top: 16px;
+    transition: background 0.4s, color 0.4s;
+  }
+  body.darkmode .stats-bar {
+    background: #101126;
+    box-shadow: 0 8px 15px #3745a8;
+  }
+  .stat-item {
+    flex: 1 1 110px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #355edf;
+    transition: color 0.4s;
+  }
+  body.darkmode .stat-num {
+    color: #8b8cff;
+  }
+  .stat-label {
+    font-size: 0.97rem;
+    color: #7699d4;
+    font-weight: 700;
+    margin-top: 2px;
+    transition: color 0.4s;
+  }
+  body.darkmode .stat-label {
+    color: #a2aefb;
+  }
+
+  /* Cards grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 2.1rem;
+  }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.6rem 1.2rem;
+    color: #3b4275;
+    box-shadow: 0 3px 20px #eaeafb;
+    text-align: center;
+    transition: background 0.4s, color 0.4s, transform 0.19s;
+  }
+  .card:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+  body.darkmode .card {
+    background: #1f2034;
+    color: #ccd0ff;
+    box-shadow: 0 8px 30px #1e1f3e;
+  }
+  .card-icon {
+    font-size: 2.1rem;
+    margin-bottom: 1rem;
+    color: #7c3aed;
+  }
+  body.darkmode .card-icon {
+    color: #9b80ff;
+  }
+  .card h3 {
+    font-size: 1.07rem;
+    margin-bottom: 0.7rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .card p {
+    font-size: 0.99rem;
+    color: #4d598a;
+  }
+  body.darkmode .card p {
+    color: #d1d4ff;
+  }
+  .info-box {
+    background: #ecf0fe;
+    padding: 1.15rem 1.4rem;
+    border-radius: 11px;
+    border-left: 5px solid #be9ef4;
+    color: #272948;
+    margin-bottom: 1.7rem;
+    transition: background 0.4s, color 0.4s;
+  }
+  body.darkmode .info-box {
+    background: #171729;
+    border-left-color: #9164ff;
+    color: #c2c5f9;
+  }
+
+  /* Mode list */
+  .mode-list {
+    display: flex;
+    justify-content: center;
+    gap: 2.7rem;
+    margin-bottom: 40px;
+  }
+  .mode-card {
+    background: #fff;
+    box-shadow: 0 2px 15px #eaeafb;
+    border-radius: 13px;
+    padding: 1.4rem 1.3rem;
+    text-align: center;
+    min-width: 220px;
+    max-width: 260px;
+    font-family: 'Montserrat', sans-serif;
+    transition: background 0.4s, color 0.4s, transform 0.19s;
+  }
+  .mode-card h3 {
+    margin-top: 0.35rem;
+    font-size: 1.13rem;
+  }
+  .mode-card p {
+    color: #6c7bb1;
+    font-size: 0.98rem;
+  }
+  .mode-card.soon {
+    opacity: 0.65;
+  }
+  body.darkmode .mode-card {
+    background: #23242b;
+    color: #c1c4ff;
+    box-shadow: 0 4px 25px #1e1f3e;
+  }
+  body.darkmode .mode-card.soon {
+    opacity: 0.45;
+  }
+
+  /* Team section */
+  .team-section {
+    margin-bottom: 36px;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 2rem;
+  }
+  .team-category {
+    margin-bottom: 38px;
+  }
+  .team-cat-title {
+    font-size: 1.12rem;
+    font-weight: 800;
+    margin: 0 0 14px 0;
+    color: #253986;
+    background: linear-gradient(90deg, #5476e7, #be9ef4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  body.darkmode .team-cat-title {
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+  }
+  .team-member {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    box-shadow: 0 2px 14px #e3e7fc;
+    color: #233684;
+    text-align: center;
+    transition: background 0.4s, color 0.4s, box-shadow 0.3s;
+  }
+  .team-member:hover {
+    box-shadow: 0 5px 20px #a396ff;
+  }
+  body.darkmode .team-member {
+    background: #1f2034;
+    color: #ccd0ff;
+    box-shadow: 0 8px 27px #1e1f3e;
+  }
+  .member-avatar {
+    font-size: 1.55rem;
+    background: #be9ef4;
+    width: 44px;
+    height: 44px;
+    margin: auto 0 0.7rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 5px;
+  }
+  body.darkmode .member-avatar {
+    background: #9164ff;
+  }
+  .member-role {
+    font-size: 0.97rem;
+    color: #7c3aed;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.28rem;
+  }
+  body.darkmode .member-role {
+    color: #b5a1ff;
+  }
+
+  /* Contact section */
+  .contact-section {
+    margin-bottom: 46px;
+  }
+  .contact-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.8rem;
+  }
+  .contact-box {
+    background: #fff;
+    padding: 1.5rem 1.1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 14px #e3e7fc;
+    color: #253986;
+    transition: background 0.4s, color 0.4s;
+  }
+  body.darkmode .contact-box {
+    background: #171729;
+    color: #c2c5f9;
+    box-shadow: 0 4px 16px #2f2f52;
+  }
+  .contact-box h4 {
+    font-size: 1.04rem;
+    margin-bottom: 0.7rem;
+    background: linear-gradient(80deg, #7c3aed, #5c5cff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .contact-box a {
+    color: #3b4275;
+    text-decoration: underline;
+  }
+  body.darkmode .contact-box a {
+    color: #8aa3ff;
+  }
+
+  /* Toast/Loader */
+  .notification {
+    position: fixed;
+    top: 32px;
+    right: 22px;
+    z-index: 9999;
+    background: #fff;
+    color: #23242b;
+    padding: 1.1rem 2rem;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.13rem;
+    min-width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 38px #cfd5e8;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    animation: fadeToastInOut 2.2s cubic-bezier(.22, .61, .36, 1);
+    border: 2px solid #a3a9fa;
+    transition: background 0.4s, color 0.4s;
+  }
+  body.darkmode .notification {
+    background: #23242b;
+    color: #a5b4fc;
+    border: 2px solid #8b5cf6;
+    box-shadow: 0 7px 38px #954afb;
+  }
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #eee;
+    border-top: 3px solid #a3a9fa;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.7s linear infinite;
+    margin-right: 8px;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
     }
-    .container { max-width: 1100px; margin:auto; padding:0 18px; }
-    header {
-      background: #fff;
-      box-shadow: 0 2px 10px #ecf0f6;
-      padding-bottom: 0.6rem;
-      position: sticky; top: 0; z-index: 10;
+  }
+  @keyframes fadeToastInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
     }
-    .nav { display:flex; align-items:center; justify-content:space-between; padding:0.7rem 0; }
-    .nav-logo img {
-      height:46px; border-radius:5px;
-      vertical-align:middle; cursor:pointer;
-      transition: filter .2s;
+    10%,
+    80% {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .nav-logo img:hover { filter: brightness(1.07) drop-shadow(0 2px 10px #a3a9fa);}
-    .nav-links { display:flex; gap:26px;}
-    .nav-links a, .nav-links button {
-      background: none; border: none; color: #5a65a4;
-      font-weight: 700; font-size: 1.1rem; cursor: pointer;
-      padding: 0.38rem 1.1rem; border-radius: 22px; transition: background .18s, color .18s; text-decoration: none;
+    100% {
+      opacity: 0;
+      transform: translateY(-30px);
     }
-    .nav-links a.active, .nav-links a:hover, .nav-links button.active, .nav-links button:hover {
-      color:#fff; background: #a3a9fa;
-    }
-    .nav-links .store-btn {
-      color: #fff; background: #23242b;
-      font-family: 'Montserrat', sans-serif; font-weight: 700;
-      box-shadow: 0 1px 10px #a3a9fa; margin-left:16px;
-    }
-    .nav-links .store-btn:hover { background:#4d5060;}
-    /* Hero sekce BEZ obdélníku */
-    .hero {
-      text-align:center;padding:60px 8px 50px;
-      margin-bottom:38px;width:100%;
-      background: linear-gradient(120deg, #d1d9f9 0%, #ececfb 80%);
-      border-radius: 0 0 54px 54px; box-shadow: 0 12px 26px #e3e7fc;
-      color:#233684;
-    }
-    .hero h1 {font-size:2.6rem;font-weight:900;margin-bottom:1.08rem;}
-    .hero-desc {font-size:1.18rem;margin-bottom:1.45rem;color:#5573ba;}
-    .server-ip-btn {
-      display:inline-block;
-      background:#23242b; color:#fff;
-      padding:1.05rem 2.2rem;font-size:1.04rem;font-family:'Montserrat',sans-serif;font-weight:700;
-      border-radius:40px;box-shadow:0 3px 16px #a3a9fa;
-      margin-bottom:1.05rem;cursor:pointer;border:none;user-select:all;
-      position:relative;overflow:hidden;transition:.22s;
-      letter-spacing:0.03em;
-    }
-    .server-ip-btn:hover, .server-ip-btn:active { background:#35363e;}
-    .store-cta {
-      display:inline-block; margin-top:14px;
-      font-size:1.06rem; border-radius:40px; padding:0.85rem 2.3rem;
-      background: #23242b; color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; box-shadow:0 2px 11px #cfd5e8; border:none;
-      text-decoration:none; transition:.2s;
-    }
-    .store-cta:hover{background:#3a3b48;}
-    .section { margin-top:60px; margin-bottom:60px;}
-    .section-title {
-      font-size:2.1rem; font-weight:900; text-align:center;
-      margin-bottom:2rem; margin-top:0.25rem;
-      background:linear-gradient(90deg,#5476e7,#be9ef4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
-    /* Stats (živě) */
-    .stats-live {
-      padding:1.4rem 0;font-size:1.07rem;text-align:center;
-      color:#3351b2;background: #f5f7fd;border-radius:14px;box-shadow: 0 2px 10px #e3e7fc; margin-bottom:22px; margin-top:1rem;
-      font-family:'Montserrat',sans-serif;
-    }
-    .stats-live strong{ font-weight:800; color:#1e2865;}
-    #playerList { color:#6384ce; font-size:.95rem;}
+  }
+  /* Footer */
+  footer {
+    background: #f5f7fd;
+    color: #253986;
+    padding: 2rem 0 1.2rem;
+    margin-top: 54px;
+    box-shadow: 0 -2px 12px #e3e7fc;
+    border-top: 1.5px solid #e6eaf5;
+    transition: background 0.4s, color 0.4s;
+  }
+  body.darkmode footer {
+    background: #1a1b22;
+    color: #a5b4fc;
+    box-shadow: 0 -2px 10px #474b73;
+    border-top-color: #3a3b48;
+  }
+  .footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 3.2rem;
+    flex-wrap: wrap;
+  }
+  .footer-section h4 {
+    color: #4d598a;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+  body.darkmode .footer-section h4 {
+    color: #a29feb;
+  }
+  .footer-section a {
+    color: #6695f6;
+    display: block;
+    margin-bottom: 0.32rem;
+    text-decoration: none;
+  }
+  .footer-section a:hover {
+    color: #23242b;
+  }
+  body.darkmode .footer-section a:hover {
+    color: #abe4ff;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 1.0rem;
+  }
+  .social-links a {
+    background: #23242b;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background 0.4s, color 0.4s;
+  }
+  .social-links a:hover {
+    background: #a3a9fa;
+    color: #23242b;
+  }
+  /* Responsive */
+  @media (max-width: 900px) {
     .stats-bar {
-      background:#f5f7fd;border-radius:14px;
-      padding:1.18rem 0;box-shadow:0 6px 12px #e3e7fc;
-      display:flex;justify-content:center;gap:42px;max-width:900px;margin:auto;margin-bottom:14px;margin-top:16px;
+      gap: 20px;
     }
-    .stat-item { flex:1 1 110px;text-align:center;font-family:'Montserrat',sans-serif;}
-    .stat-num {font-size:2rem;font-weight:900;color:#355edf;}
-    .stat-label { font-size:.97rem; color:#7699d4; font-weight:700; margin-top:2px;}
-    /* Cards */
-    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:2.1rem;}
-    .card{background:#fff;border-radius:14px;padding:1.6rem 1.2rem;color:#3b4275;box-shadow:0 3px 20px #eaeafb; text-align:center;transition:transform 0.19s;}
-    .card:hover{transform:translateY(-5px) scale(1.01);}
-    .card-icon{font-size:2.1rem;margin-bottom:1rem; color:#7c3aed;}
-    .card h3{font-size:1.07rem;margin-bottom:0.7rem; font-family:'Montserrat',sans-serif;}
-    .card p{font-size:.99rem;color:#4d598a;}
-    .info-box{background:#ecf0fe;padding:1.15rem 1.4rem;border-radius:11px;border-left:5px solid #be9ef4;color:#272948;margin-bottom:1.7rem;}
-    .info-box h3{font-weight:700;}
-    /* Herní sekce » Frakce a brzy */
-    .mode-list {display:flex;justify-content:center;gap:2.7rem;}
-    .mode-card {
-      background:#fff;box-shadow:0 2px 15px #eaeafb;border-radius:13px;
-      padding:1.4rem 1.3rem;text-align:center;min-width:220px;max-width:260px;
-      font-family:'Montserrat',sans-serif;transition:.19s;
+    .section {
+      margin-top: 34px;
+      margin-bottom: 34px;
     }
-    .mode-card h3 {margin-top:0.35rem; font-size:1.13rem;}
-    .mode-card p {color:#6c7bb1;font-size:.98rem;}
-    .mode-card.soon{opacity:0.65;}
-    /* Tým sekce */
-    .team-section{margin-bottom:36px;}
-    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2rem;}
-    .team-category{margin-bottom:38px;}
-    .team-cat-title{font-size:1.12rem;font-weight:800;margin:0 0 14px 0;color:#253986;background:linear-gradient(90deg,#5476e7,#be9ef4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .team-member{background:#fff;border-radius:10px;padding:1.2rem 1rem;box-shadow:0 2px 14px #e3e7fc;color:#233684;text-align:center;}
-    .member-avatar{font-size:1.55rem;background:#be9ef4;width:44px;height:44px;margin:auto 0 0.7rem;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Montserrat';margin-bottom:5px;}
-    .member-role{font-size:.97rem;color:#7c3aed; font-family:'Montserrat',sans-serif;margin-bottom:0.28rem;}
-    /* Kontakty */
-    .contact-section {margin-bottom:46px;}
-    .contact-boxes {display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.8rem;}
-    .contact-box {
-      background:#fff;padding:1.5rem 1.1rem;border-radius:10px;box-shadow:0 2px 14px #e3e7fc;
-      color:#253986;
+  }
+  @media (max-width: 600px) {
+    .nav-links {
+      gap: 8px;
     }
-    .contact-box h4 {
-      font-size:1.04rem;margin-bottom:0.7rem;background:linear-gradient(80deg,#7c3aed,#5c5cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    .hero {
+      padding: 32px 4px 24px;
     }
-    .contact-box a {color:#3b4275;text-decoration:underline;}
-    .contact-box .contact-icon {font-size:1.3rem;margin-right:7px;}
-    /* Toast/Loader */
-    .notification {
-      position:fixed;top:32px;right:22px;z-index:9999;
-      background: #fff; color:#23242b;
-      padding:1.1rem 2rem;border-radius:30px;
-      font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.13rem;
-      min-width:200px;text-align:center;
-      box-shadow:0 4px 38px #cfd5e8;
-      display:flex;align-items:center;gap:1.2rem;
-      animation:fadeToastInOut 2.2s cubic-bezier(.22,.61,.36,1);
-      border: 2px solid #a3a9fa;
+    .section-title {
+      font-size: 1.18rem;
     }
-    .spinner {
-      width:20px; height:20px; border:3px solid #eee; border-top:3px solid #a3a9fa; border-radius:50%; display:inline-block;animation:spin 0.7s linear infinite;margin-right:8px;}
-    @keyframes spin { to {transform:rotate(360deg);} }
-    @keyframes fadeToastInOut {
-      0% { opacity:0; transform:translateY(-30px);}
-      10%,80%{ opacity:1; transform:translateY(0);}
-      100%{ opacity:0; transform:translateY(-30px);}
+    .stats-bar {
+      flex-direction: column;
+      gap: 13px;
     }
-    /* Footer */
-    footer {
-      background: #f5f7fd;
-      color: #253986;
-      padding: 2rem 0 1.2rem;
-      margin-top: 54px;
-      box-shadow: 0 -2px 12px #e3e7fc;
-      border-top: 1.5px solid #e6eaf5;
+    .mode-list {
+      flex-direction: column;
+      gap: 1.0rem;
     }
-    .footer-content {display:flex;justify-content:center;gap:3.2rem;flex-wrap:wrap;}
-    .footer-section h4{color:#4d598a;margin-bottom:0.5rem;font-size:1.05rem;}
-    .footer-section a{color:#6695f6;display:block;margin-bottom:0.32rem;text-decoration:none;}
-    .footer-section a:hover{color:#23242b;}
-    .social-links{display:flex;justify-content:center;gap:0.9rem;margin-top:1.0rem;}
-    .social-links a{background:#23242b;width:33px;height:33px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;}
-    .social-links a:hover{background:#a3a9fa; color:#23242b;}
-    .footer-bottom{margin-top:1rem;color:#7c7e98;font-size:.95rem;text-align:center;}
-    @media(max-width:900px){.stats-bar{gap:20px;}.section{margin-top:34px;margin-bottom:34px;}}
-    @media(max-width:600px){
-      .nav-links{gap:8px;}
-      .hero{padding:32px 4px 24px;}
-      .section-title{font-size:1.18rem;}
-      .stats-bar{flex-direction:column;gap:13px;}
-      .mode-list{flex-direction:column;gap:1.0rem;}
-      .footer-content{gap:1.5rem;}
+    .footer-content {
+      gap: 1.5rem;
     }
-    /* Page systém */
-    .page { display:none;}
-    .page.active { display:block;}
-  </style>
+  }
+  /* Page system */
+  .page {
+    display: none;
+  }
+  .page.active {
+    display: block;
+  }
+</style>
 </head>
 <body>
   <header>
     <nav class="nav container">
       <div class="nav-logo">
-        <a href="#" onclick="showPage('home')"><img src="logo.png" alt="Nexorie logo"></a>
+        <a href="#" onclick="showPage('home')"><img src="logo.png" alt="Nexorie logo" /></a>
       </div>
       <div class="nav-links">
         <a href="#" onclick="showPage('home')" class="active">Domů</a>
         <a href="#" onclick="showPage('team')">Tým</a>
         <a href="#" onclick="showPage('rules')">Pravidla</a>
         <a href="#" onclick="showPage('info')">Info</a>
+        <button id="darkmode-toggle" style="margin-left:18px;font-size:1.18rem;background:#a3a9fa;border-radius:20px;padding:0.6rem 1.2rem;cursor:pointer;">🌙 Darkmode</button>
         <a href="https://store.nexorie.eu" class="store-btn" target="_blank">Store</a>
       </div>
     </nav>
@@ -201,27 +680,54 @@
     <section id="home" class="page active">
       <div class="hero">
         <h1>Vítej na Nexorie.eu!</h1>
-        <div class="hero-desc">Prémiový Minecraft server pro CZ/SK hráče<br>Premium & Cracked | Verze 1.20.x | Online 24/7</div>
+        <div class="hero-desc">Prémiový Minecraft server pro CZ/SK hráče<br />Premium & Cracked | Verze 1.20.x | Online 24/7</div>
         <button class="server-ip-btn" onclick="copyIP()" title="Zkopírovat IP serveru">mc.nexorie.eu</button>
         <a class="store-cta" href="https://store.nexorie.eu" target="_blank">💎 Přejít na Store</a>
       </div>
       <div class="stats-live">
-        <strong>Online hráčů:</strong> <span id="onlinePlayers">Načítám...</span> / <span id="maxPlayers">?</span><br>
+        <strong>Online hráčů:</strong> <span id="onlinePlayers">Načítám...</span> / <span id="maxPlayers">?</span><br />
         <small id="playerList">Načítám seznam hráčů...</small>
       </div>
       <div class="stats-bar">
-        <div class="stat-item"><div class="stat-num"><span id="onlinePlayers">Načítám...</span></div><div class="stat-label">Aktivních hráčů</div></div>
-        <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Server online</div></div>
-        <div class="stat-item"><div class="stat-num">2+</div><div class="stat-label">Herních módů</div></div>
-        <div class="stat-item"><div class="stat-num">1+</div><div class="stat-label">Roky provozu</div></div>
+        <div class="stat-item">
+          <div class="stat-num"><span id="onlinePlayersMini">Načítám...</span></div>
+          <div class="stat-label">Aktivních hráčů</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Server online</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Herních módů</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1+</div>
+          <div class="stat-label">Roky provozu</div>
+        </div>
       </div>
       <div class="section">
         <h2 class="section-title">O serveru Nexorie</h2>
-        <div class="info-box"><h3>🌟 Mise</h3><p><strong>Nexorie.eu</strong> je top CZ/SK Minecraft server. Budujeme bezpečnou, zábavnou a komunitní platformu pro PvP, survival/frakce i eventy.</p></div>
+        <div class="info-box">
+          <h3>🌟 Mise</h3>
+          <p><strong>Nexorie.eu</strong> je top CZ/SK Minecraft server. Budujeme bezpečnou, zábavnou a komunitní platformu pro PvP, survival/frakce i eventy.</p>
+        </div>
         <div class="cards-grid">
-          <div class="card"><div class="card-icon">🚀</div><h3>Výkon a stabilita</h3><p>Špičkový HW, NVMe SSD, nízký ping, bez lagů.</p></div>
-          <div class="card"><div class="card-icon">🛡️</div><h3>Bezpečnost</h3><p>Anticheat, ochrana účtů, tým moderátorů 24/7.</p></div>
-          <div class="card"><div class="card-icon">🎲</div><h3>Rozmanitost</h3><p>PvP, Survival, Frakce, Ekonomika – každý si vybere!</p></div>
+          <div class="card">
+            <div class="card-icon">🚀</div>
+            <h3>Výkon a stabilita</h3>
+            <p>Špičkový HW, NVMe SSD, nízký ping, bez lagů.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3>Bezpečnost</h3>
+            <p>Anticheat, ochrana účtů, tým moderátorů 24/7.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎲</div>
+            <h3>Rozmanitost</h3>
+            <p>PvP, Survival, Frakce, Ekonomika – každý si vybere!</p>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -243,15 +749,17 @@
     <section id="team" class="page">
       <div class="section team-section">
         <h2 class="section-title">Tým Nexorie</h2>
+
         <div class="team-category">
           <div class="team-cat-title">Vedení serveru</div>
-  <div class="team-grid">
-    <div class="team-member"><div class="member-avatar">O</div><h3>ownedbyshade</h3><div class="member-role">Majitel</div><p>Zakladatel a majitel Nexorie.eu.</p></div>
-    <div class="team-member"><div class="member-avatar">P</div><h3>paldes12</h3><div class="member-role">Spolumajitel</div><p>Spolumajitel a správce komunity.</p></div>
-    <div class="team-member"><div class="member-avatar">A</div><h3>Ar0n1s_</h3><div class="member-role">Vedení</div><p>Management a organizace.</p></div>
-    <div class="team-member"><div class="member-avatar">T</div><h3>Tucnaczech</h3><div class="member-role">Vedení</div><p>Administrativa a komunitní management.</p></div>
-  </div>
-</div>
+          <div class="team-grid">
+            <div class="team-member"><div class="member-avatar">O</div><h3>ownedbyshade</h3><div class="member-role">Majitel</div><p>Zakladatel a majitel Nexorie.eu.</p></div>
+            <div class="team-member"><div class="member-avatar">P</div><h3>paldes12</h3><div class="member-role">Spolumajitel</div><p>Spolumajitel a správce komunity.</p></div>
+            <div class="team-member"><div class="member-avatar">A</div><h3>Ar0n1s_</h3><div class="member-role">Vedení</div><p>Management a organizace.</p></div>
+            <div class="team-member"><div class="member-avatar">T</div><h3>TvůjNick</h3><div class="member-role">Vedení</div><p>Administrativa a komunitní management.</p></div>
+          </div>
+        </div>
+
         <div class="team-category">
           <div class="team-cat-title">Technik tým</div>
           <div class="team-grid">
@@ -259,6 +767,7 @@
             <div class="team-member"><div class="member-avatar">K</div><h3>keke</h3><div class="member-role">Zkušební Technik</div><p>Frontend, web a správa API.</p></div>
           </div>
         </div>
+
         <div class="team-category">
           <div class="team-cat-title">Helper tým</div>
           <div class="team-grid">
@@ -267,11 +776,11 @@
             <div class="team-member"><div class="member-avatar">S</div><h3>SaliClient</h3><div class="member-role">Helper</div><p>Specialista na survival a ekonomiku.</p></div>
           </div>
         </div>
+
         <div class="team-category">
           <div class="team-cat-title">Builder tým</div>
           <div class="team-grid">
             <div class="team-member"><div class="member-avatar">C</div><h3>Krtek</h3><div class="member-role">Hlavní Builder</div><p>Design staveb, spawnů a projektů.</p></div>
-            <!-- další buildři dle potřeby -->
           </div>
         </div>
       </div>
@@ -281,7 +790,8 @@
     <section id="rules" class="page">
       <div class="section">
         <h2 class="section-title">Pravidla serveru</h2>
-        <div class="rules-list"><h3>🎮 Obecná pravidla</h3>
+        <div class="rules-list">
+          <h3>🎮 Obecná pravidla</h3>
           <ul>
             <li>Buď slušný k ostatním hráčům a týmu</li>
             <li>Nepoužívej nevhodný jazyk nebo spam</li>
@@ -290,75 +800,95 @@
             <li>Dodržuj pokyny týmu</li>
           </ul>
         </div>
-        <div class="rules-list"><h3>⚔️ PvP pravidla</h3>
+        <div class="rules-list">
+          <h3>⚔️ PvP pravidla</h3>
           <ul><li>Žádné cheaty a unfair výhody</li><li>Neexploituj bugy</li><li>Team killing zakázán</li></ul>
         </div>
-        <div class="rules-list"><h3>🏠 Survival/Frakce pravidla</h3>
+        <div class="rules-list">
+          <h3>🏠 Survival/Frakce pravidla</h3>
           <ul><li>Grief zakázán, claimuj si pozemek</li><li>Nekraď z truhel</li><li>Respektuj sousedy a okolí projektů</li></ul>
         </div>
-        <div class="rules-list"><h3>💬 Chat pravidla</h3>
+        <div class="rules-list">
+          <h3>💬 Chat pravidla</h3>
           <ul><li>Neflooduj chat</li><li>Nereklamuj servery</li><li>Nerozšiřuj osobní informace</li></ul>
         </div>
-        <div class="info-box"><h3>⚠️ Sankce za porušení</h3>
+        <div class="info-box">
+          <h3>⚠️ Sankce za porušení</h3>
           <p><strong>Varování</strong>, <strong>mute</strong> (1–24 hodin), <strong>kick</strong>, <strong>tempban</strong> (1–30 dní), <strong>permban</strong> za závažné přestupky.</p>
         </div>
       </div>
     </section>
 
     <!-- Info -->
-<section id="info" class="page">
-  <div class="section contact-section">
-    <h2 class="section-title">Informace & Kontakt</h2>
-    <div class="contact-boxes">
-      <div class="contact-box">
-        <h4>💬 Discord podpora</h4>
-        <p>Oficiální ticket systém na <a href="https://discord.nexorie.eu" target="_blank">Discordu</a>.<br>
-        Technická podpora je dostupná 24/7.</p>
-      </div>
-      <div class="contact-box">
-        <h4>📧 E-mail</h4>
-        <p>Obecná podpora: <a href="mailto:info@nexorie.eu">info@nexorie.eu</a></p>
-        <p>Vedení serveru: <a href="mailto:vedeni@nexorie.eu">vedeni@nexorie.eu</a></p>
-        <p>Podpora: <a href="mailto:help@nexorie.eu">help@nexorie.eu</a></p>
-      </div>
-      <div class="contact-box">
-        <h4>👑 YT/TikTok rank</h4>
-        <p><b>Jak získat:</b> Aktivní YT/TikTok kanál o Minecraftu. Podmínka: min. 1000 odběrů/2500 sledujících.<br>
-        <b>Jak žádat:</b> Napiš na <a href="mailto:info@nexorie.eu">info@nexorie.eu</a> nebo otevři ticket na Discordu (Kategorie: „Ostatní“) a přidej odkaz na kanál.<br>
-        <b>Výhody:</b> Speciální role, možnost eventů a propagace svého kanálu.</p>
-      </div>
-      <div class="contact-box">
-        <h4>📋 Partnerství</h4>
-        <p>Máš svou komunitu a chceš spolupráci? Kontaktuj nás přes e-mail či ticket.<br>
-          Požadujeme aktivitu, originalitu a přínos serveru.</p>
-      </div>
-    </div>
-    <div class="info-box" style="margin-top:1.5rem;">
-      <h3>Potřebuješ pomoc?</h3>
-      <p>Discord ticket je nejrychlejší. Na e-maily odpovídáme do 24h. Email preferuj pro obchodní nebo dlouhé zprávy.</p>
-    </div>
+    <section id="info" class="page">
+      <div class="section contact-section">
+        <h2 class="section-title">Informace & Kontakt</h2>
 
-    <!-- FAQ začátek -->
-    <div class="info-box" style="background:#fff;">
-      <h3 style="color:#233684;">Často kladené otázky</h3>
-      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jak se připojím na server?</div>
-        <div class="faq-answer"><p>Otevři Minecraft, v multiplayeru zadej IP <strong>mc.nexorie.eu</strong>.</p></div></div>
-      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jakou verzi potřebuju?</div>
-        <div class="faq-answer"><p>Podporujeme 1.20.x, doporučena je 1.20.4.</p></div></div>
-      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Je server pro cracked hráče?</div>
-        <div class="faq-answer"><p>Ano, podporujeme i cracked Minecraft klienty.</p></div></div>
-      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jak získám peníze?</div>
-        <div class="faq-answer"><p>Prací v jobs, prodejem v /shop, eventy, obchodování s hráči.</p></div></div>
-      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Jak claimnu pozemek?</div>
-        <div class="faq-answer"><p>/claim, zlatá lopata – označ dva rohy pozemku.</p></div></div>
-      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Co dělat když mě někdo grieví?</div>
-        <div class="faq-answer"><p>Nahlas členům týmu přes /report nebo ticket na Discordu.</p></div></div>
-      <div class="faq-item"><div class="faq-question" style="font-weight:700;cursor:pointer;" onclick="toggleFaq(this)">Kde najdu příkazy?</div>
-        <div class="faq-answer"><p>/help pro základní příkazy, /menu pro interaktivní nabídku.</p></div></div>
-    </div>
-    <!-- FAQ konec -->
-  </div>
-</section>
+        <div class="contact-boxes">
+          <div class="contact-box">
+            <h4>💬 Discord podpora</h4>
+            <p>Oficiální ticket systém na <a href="https://discord.nexorie.eu" target="_blank">Discordu</a>.<br />Technická podpora je dostupná 24/7.</p>
+          </div>
+
+          <div class="contact-box">
+            <h4>📧 E-mail</h4>
+            <p>Obecná podpora: <a href="mailto:info@nexorie.eu">info@nexorie.eu</a></p>
+            <p>Vedení serveru: <a href="mailto:vedeni@nexorie.eu">vedeni@nexorie.eu</a></p>
+            <p>Podpora: <a href="mailto:help@nexorie.eu">help@nexorie.eu</a></p>
+          </div>
+
+          <div class="contact-box">
+            <h4>👑 YouTuber / TikTok rank</h4>
+            <p><b>Jak získat:</b> Aktivní Minecraft kanál na YT/TikToku.<br />Min. 1000 odběrů / 2500 sledujících.<br />
+              <b>Jak žádat:</b> Napiš na <a href="mailto:info@nexorie.eu">info@nexorie.eu</a> nebo na Discord ticket („YT rank“).<br />
+              <b>Výhody:</b> Speciální role, možnost pořádání eventů, propagace.</p>
+          </div>
+
+          <div class="contact-box">
+            <h4>📋 Partnerství a spolupráce</h4>
+            <p>Zájemci o spolupráci nás kontaktují přes e-mail nebo ticket.<br />Požadujeme aktivitu, originalitu a přínos.</p>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 2rem;">
+          <h3>Potřebuješ pomoc?</h3>
+          <p>Discord ticket je nejrychlejší, na e-maily odpovídáme obvykle do 24 hodin.<br />Preferuj e-mail pro obchodní a rozsáhlejší dotazy.</p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="info-box" style="background:#fff; color:#233684;">
+          <h3>Často kladené otázky</h3>
+
+          <div class="faq-item"><div class="faq-question" style="cursor:pointer; font-weight:700;" onclick="toggleFaq(this);">Jak se připojím na server?</div>
+            <div class="faq-answer" style="display:none;">Otevři Minecraft, v multiplayeru zadej IP <strong>mc.nexorie.eu</strong>.</div>
+          </div>
+
+          <div class="faq-item"><div class="faq-question" style="cursor:pointer; font-weight:700;" onclick="toggleFaq(this);">Jakou verzi potřebuju?</div>
+            <div class="faq-answer" style="display:none;">Podporujeme verze 1.20.x, doporučujeme verzi 1.20.4.</div>
+          </div>
+
+          <div class="faq-item"><div class="faq-question" style="cursor:pointer; font-weight:700;" onclick="toggleFaq(this);">Mohu hrát s cracked Minecraftem?</div>
+            <div class="faq-answer" style="display:none;">Ano, server podporuje premium i cracked hráče.</div>
+          </div>
+
+          <div class="faq-item"><div class="faq-question" style="cursor:pointer; font-weight:700;" onclick="toggleFaq(this);">Jak získám peníze na serveru?</div>
+            <div class="faq-answer" style="display:none;">Peníze můžeš získat prodejem itemů v /shop, prací v jobs, obchodováním nebo účastí na eventech.</div>
+          </div>
+
+          <div class="faq-item"><div class="faq-question" style="cursor:pointer; font-weight:700;" onclick="toggleFaq(this);">Jak claimnu pozemek?</div>
+            <div class="faq-answer" style="display:none;">Použij příkaz /claim, golden shovel a označ dva rohy oblasti, kterou chceš claimnout.</div>
+          </div>
+
+          <div class="faq-item"><div class="faq-question" style="cursor:pointer; font-weight:700;" onclick="toggleFaq(this);">Co dělat když mě někdo grieví?</div>
+            <div class="faq-answer" style="display:none;">Okamžitě to nahlašuj členům týmu pomocí /report [jméno hráče] [důvod] nebo na Discordu.</div>
+          </div>
+
+          <div class="faq-item"><div class="faq-question" style="cursor:pointer; font-weight:700;" onclick="toggleFaq(this);">Kde najdu všechny příkazy?</div>
+            <div class="faq-answer" style="display:none;">Použij /help pro základní příkazy nebo /menu pro interaktivní menu s všemi funkcemi serveru.</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
   <footer>
     <div class="footer-content">
@@ -376,7 +906,7 @@
       </div>
       <div class="footer-section">
         <h4>Podpora</h4>
-        <a href="#" onclick="showPage('faq')">FAQ</a>
+        <a href="#" onclick="showPage('info')">Info</a>
         <a href="https://discord.nexorie.eu" target="_blank">Ticket systém</a>
         <a href="https://nexorie.eu/banlist" target="_blank">Banlist</a>
       </div>
@@ -401,29 +931,32 @@
       window.scrollTo({top:0,behavior:'smooth'});
     }
     // FAQ animation
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.onclick = function() { this.classList.toggle('active'); };
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.onclick=function() { this.classList.toggle('active'); };
     });
-    // IP kopírování s loaderem/animací
+    // Kopírování IP s loaderem
     function copyIP() {
-      const notif = document.createElement('div');
-      notif.className = 'notification';
-      notif.innerHTML = '<span class="spinner"></span> IP adresa se kopíruje...';
+      const notif=document.createElement('div');
+      notif.className='notification';
+      notif.innerHTML='<span class="spinner"></span> IP adresa se kopíruje...';
       document.body.appendChild(notif);
       setTimeout(() => {
-        notif.innerHTML = '✅ IP adresa byla zkopírována!';
-        navigator.clipboard.writeText('mc.nexorie.eu');
+          notif.innerHTML='✅ IP adresa <b>mc.nexorie.eu</b> byla zkopírována!';
+          navigator.clipboard.writeText('mc.nexorie.eu');
       }, 750);
       setTimeout(()=>notif.remove(),2200);
     }
-    // Live hráči přes API
+    // Živý stav hráčů přes API
     function loadPlayers() {
       fetch('https://api.mcsrvstat.us/2/mc.nexorie.eu')
         .then(r=>r.json())
         .then(data=>{
-          document.getElementById('onlinePlayers').textContent = data.players?.online || '0';
-          document.getElementById('maxPlayers').textContent = data.players?.max || '?';
-          document.getElementById('playerList').textContent = data.players?.list?.length ? data.players.list.join(', ') : 'Žádní hráči online';
+          document.getElementById('onlinePlayers').textContent=data.players?.online||'0';
+          document.getElementById('maxPlayers').textContent=data.players?.max||'?';
+          document.getElementById('playerList').textContent=(data.players?.list?.length?data.players.list.join(', '):'Žádní hráči online');
+          // Aktualizace mini statistik pokud existují
+          const miniOnline = document.getElementById('onlinePlayersMini');
+          if(miniOnline) { miniOnline.textContent = data.players?.online || '0'; }
         });
     }
     document.addEventListener('DOMContentLoaded',()=>{
