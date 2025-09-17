@@ -1012,7 +1012,7 @@ body.darkmode .section-title {
   }
   // Live players API
   function loadPlayers() {
-    fetch('https://api.mcsrvstat.us/2/mc.nexorie.eu')
+    fetch('https://api.mcsrvstat.us/2/creeper.blazehost.cz:26050')
     .then(res => res.json())
     .then(data => {
       document.getElementById('onlinePlayers').textContent = data.players?.online || '0';
